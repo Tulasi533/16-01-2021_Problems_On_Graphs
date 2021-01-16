@@ -1,0 +1,25 @@
+### Possible paths between 2 vertices
+
+# Source Code
+
+ class Solution
+{
+    public int countPaths(int V, ArrayList<ArrayList<Integer>> adj, int source, int destination)
+    {
+        // Code here
+        int count_path = 0;
+        count_path = Path(source, destination, adj, count_path);
+        return count_path;
+    }
+    public int Path(int s, int d, ArrayList<ArrayList<Integer>> adj, int count_path){
+        if(s == d){
+            count_path += 1;
+        }
+        else{
+            for(Integer x : adj.get(s)){
+                count_path = Path(x,d,adj,count_path);
+            }
+        }
+        return count_path;
+    }
+}
