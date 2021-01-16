@@ -1,0 +1,28 @@
+### BFS of graph
+
+# Source Code
+  
+  class Solution
+  {
+      public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj)
+      {
+          // Code here
+          ArrayList<Integer> al = new ArrayList<>();
+          Queue<Integer>q = new LinkedList<>();
+          boolean visited[] = new boolean[V];
+          q.add(0);
+          while(q.size() != 0){
+              int s = q.poll();
+              al.add(s);
+              for (Integer y : adj.get(s)){
+                  if(!visited[y]){
+                      visited[y] = true;
+                      q.add(y);
+                  }
+              }
+          }
+          return al;
+      }
+  }
+
+  
