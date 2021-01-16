@@ -1,0 +1,43 @@
+### Rotting_Oranges
+
+# Source Code
+
+  class Solution {
+    public int orangesRotting(int[][] grid) {
+        int fresh_oranges = 0;
+        int time = 0;
+        Queue <int []> q = new LinkedList<>();
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+                if(grid[i][j] == 1){
+                    fresh_oranges += 1;
+                }
+                else if(grid[i][j] == 2){
+                    q.add(new int[]{i,j});
+                }
+            }
+        }
+        int directions[][] = {{0,1}, {1,0}, {-1,0}, {0,-1}};
+        while(fresh_oranges > 0 && !q.isEmpty()){
+            time += 1;
+            int size = q.size();
+            while(size-- > 0){
+                int xy[] = q.poll();
+                for(int d[] : directions){
+                    int x = xy[0] + d[0];
+                    int y = xy[1] + d[1];
+                    if(x<0 || x>=grid.length || y<0 || y>=grid[0].length || grid[x][y] ==0 || grid[x][y] == 2){
+                        continue;
+                    }
+                    q.add(new int[]{x,y});
+                    grid[x][y] = 2;
+                    fresh_oranges -= 1;
+                }
+            }
+        }
+        if(fresh_oranges == 0){
+            return time;
+        }
+        return -1;
+    }
+}
